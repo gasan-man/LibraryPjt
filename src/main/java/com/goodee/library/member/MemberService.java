@@ -1,5 +1,7 @@
 package com.goodee.library.member;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +22,16 @@ public class MemberService {
 				result = dao.insertMember(vo);
 			}
 			return result;
+		}
+		
+		public MemberVo loginMember(MemberVo vo) {
+			LOGGER.info("[MemberService] loginMember();");
+			MemberVo loginedMember = dao.selectMember(vo);
+			return loginedMember;
+		}
+		
+		public List<MemberVo> listupMember(){
+			LOGGER.info("[MemberService] listupMember();");
+			return dao.selectMemberList();
 		}
 }
