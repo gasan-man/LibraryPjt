@@ -53,4 +53,14 @@
 			</where>
 		</select>
 		
+		<update id="updatePassword" parameterType="hashMap">
+			<!-- tbl_member 테이블에 m_pw를 #{m_pw}로 변경 m_mod_date를 현재시간으로 변경 조건 : m_id가 #{m_id} -->		
+			UPDATE tbl_member
+			SET m_pw = #{m_pw},
+			m_mod_date = NOW()
+			<where>
+				m_id = #{m_id}
+			</where>
+		</update>
+		
 </mapper>

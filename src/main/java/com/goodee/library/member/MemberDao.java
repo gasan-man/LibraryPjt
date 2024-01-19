@@ -1,15 +1,14 @@
 package com.goodee.library.member;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -167,5 +166,19 @@ public class MemberDao {
 	public MemberVo selectMemberOne(MemberVo vo) {
 		MemberVo memberVo = sqlSession.selectOne(namespace+"selectMemberForPassword",vo);
 		return memberVo;
+	}
+	
+	public int updatePassword(String m_id, String newPassword) {
+		LOGGER.info("[MemberDao] updatePassword();");
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("m_id", m_id);
+		map.put("m_pw", passwordEncoder.encode(newPassword));
+		int result = -1;
+		try {
+			result = sqlSession.update(namespace+"updatePassword",map);
+		} catch (Exception e) {
+			LOGGER.error(e.toString());
+		}
+		return result;
 	}
 }
