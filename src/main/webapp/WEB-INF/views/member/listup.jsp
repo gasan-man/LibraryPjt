@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원 목록</title>
 <link href="<c:url value='/resources/css/member/listup.css'/>" rel="stylesheet" type="text/css">
+<link href="<c:url value='/resources/css/include/paging.css'/>" rel="stylesheet" type="text/css">
 </head>
 <body>
    <jsp:include page="../include/header.jsp"/>
@@ -42,5 +43,7 @@
          </div>
       </div>
    </section>   
+
+   
 </body>
 </html>
