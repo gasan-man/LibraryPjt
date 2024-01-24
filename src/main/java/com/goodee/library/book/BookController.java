@@ -87,10 +87,60 @@ public class BookController {
 		// 1. 도서 하나 정보 조회
 		BookVo vo = bookService.bookDetail(b_no);
 		// 2. 화면 전환 + 정보 전달
-		return "";
+		model.addAttribute("bookVo", vo);
+		
+		// webapp/resources/css/book/detail.css
+		// WEB-INF/views/book/detail.jsp
+		
+		
+		return "book/detail";
 	}
 	
+	// 도서 수정 이동
+	@RequestMapping(value="/modify/{b_no}", method=RequestMethod.GET)
+	public String modifyBookForm(@PathVariable int b_no,Model model) {
+		LOGGER.info("[BookController] modifyBookForm();");
+		// 1. 기존 정보 조회
+		BookVo vo = bookService.bookDetail(b_no);
+		// 2. 화면 전환 + 정보 전달
+		model.addAttribute("bookVo", vo);
+		return "book/modify";
+		// book/modify.css
+	}
 	
+	// 도서 수정 기능
+	@RequestMapping(value="/modify/{b_no}", method=RequestMethod.POST)
+	public String modifyBookConFirm(BookVo vo,
+			@RequestParam("file") MultipartFile file) {
+		LOGGER.info("[BookController] modifyBookConFirm();");
+		// 1. 만약에 새로운 파일 o -> 파일 업로드
+		if(file.getOriginalFilename().equals("") == false) {
+			String savedFileName = uploadFileService.upload(file);
+			if(savedFileName != null) {
+				vo.setB_thumbnail(savedFileName);
+			
+			}
+		}
+		// 2. 도서 정보 수정
+		int result = bookService.modifyConfirm(vo);
+			
+		// (1) BookService에 modifyConfirm메소드 생성
+		// (2) BookDao에 updateBook 메소드 생성
+		// (3) BookService에 modifyConfirm이 BookDao의 updateBook으로부터
+		// int(update 수행결과)를 전달
+		// (4) Book_mapper에 updateBook 쿼리 생성
+		// -> 파라미터가 BookVo
+		// -> tbl_book을 UPDATE
+		// -> b_name, b_author, b_publisher, b_publish_year, b_mod_date
+		// -> 만약에 b_thumbnail이 null이 아니면서 빈 스트림이 아니라면 b_thumbnail도 수정
+		
+		// 3. 결과 화면 이동
+		if(result <= 0) {
+			return "book/modify_fail";
+		}else {
+		return "book/modify_success";
+	}
+	}
 	// 메소드 명 -> bookDetail
 	// 정수형 b_no를 url을 통해서 받아오기
 

@@ -101,7 +101,7 @@ public class MemberController {
 	
 	// 회원 목록 이동
 	@RequestMapping(method=RequestMethod.GET)
-	public String listupMember(Model model) {
+	public String listupMember(Model model,MemberVo vo) {
 		LOGGER.info("[MemberController] listupMember();");
 		// 1. 목록 정보 조회
 		List<MemberVo> memberVos = memberService.listupMember();

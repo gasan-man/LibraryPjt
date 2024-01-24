@@ -44,6 +44,11 @@ public class BookDao {
 		BookVo vo = sqlSession.selectOne(namespace+"selectBookOne",b_no);
 		return vo;
 	}
+	public int updateBook (BookVo vo) {
+		LOGGER.info("[BookDao] updateBook();");
+		int result = sqlSession.update(namespace+"updateBook",vo);
+		return result;
+	}
 }
 
 	

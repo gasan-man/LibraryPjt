@@ -39,5 +39,10 @@ public int createBookConfirm(BookVo vo) {
 		BookVo vo = bookdao.selectBookOne(b_no);
 		return vo;
 	}
+	
+	public int modifyConfirm(BookVo vo) {
+		LOGGER.info("[BookService] modifyConfirm();");
+		return bookdao.updateBook(vo);
+	}
 
 }
