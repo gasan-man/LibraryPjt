@@ -49,6 +49,11 @@ public class BookDao {
 		int result = sqlSession.update(namespace+"updateBook",vo);
 		return result;
 	}
+	public int deleteBook (int b_no) {
+		LOGGER.info("[BookDao] deleteBook();");
+		int result = sqlSession.delete(namespace+"deleteBook",b_no);
+		return result; 
+	}
 }
 
 	

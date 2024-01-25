@@ -44,5 +44,10 @@ public int createBookConfirm(BookVo vo) {
 		LOGGER.info("[BookService] modifyConfirm();");
 		return bookdao.updateBook(vo);
 	}
+	
+	public int deleteBook(int b_no) {
+		LOGGER.info("[BookService] deleteBook();");
+		return bookdao.deleteBook(b_no);
+	}
 
 }
