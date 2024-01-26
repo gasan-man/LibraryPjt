@@ -15,7 +15,7 @@ public class UploadFileService {
 		String fileOriName = file.getOriginalFilename();
 		String fileExtension = fileOriName.substring
 				(fileOriName.lastIndexOf("."),fileOriName.length());
-		String uploadDir = "C:\\library\\upload\\";
+		String uploadDir = "/var/lib/tomcat9/webapps/upload/";
 		
 		UUID uuid = UUID.randomUUID();
 		String uniqueName = uuid.toString().replaceAll("-", "");
